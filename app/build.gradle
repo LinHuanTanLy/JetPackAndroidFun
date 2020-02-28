@@ -64,4 +64,7 @@ dependencies {
 
     // statusbarutil
     implementation 'com.jaeger.statusbarutil:library:1.5.1'
+
+    // viewpage2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 }

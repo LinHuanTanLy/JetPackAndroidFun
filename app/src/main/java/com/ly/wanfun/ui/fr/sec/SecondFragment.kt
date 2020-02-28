@@ -1,4 +1,4 @@
-package com.ly.wanfun.fr.sec
+package com.ly.wanfun.ui.fr.sec
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle

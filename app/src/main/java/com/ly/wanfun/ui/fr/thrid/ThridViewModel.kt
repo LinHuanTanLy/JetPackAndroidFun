@@ -1,4 +1,4 @@
-package com.ly.wanfun.fr.thrid
+package com.ly.wanfun.ui.fr.thrid
 
 import androidx.lifecycle.ViewModel
 

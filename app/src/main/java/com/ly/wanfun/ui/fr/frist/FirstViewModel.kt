@@ -1,6 +1,5 @@
-package com.ly.wanfun.fr.frist
+package com.ly.wanfun.ui.fr.frist
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.ly.wanfun.base.BaseVm
 import com.ly.wanfun.domain.bean.BannerBean
