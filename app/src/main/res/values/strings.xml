@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">WanFun</string>
     <string name="now_loading">加载中…</string>
+    <string name="text_mine">我的</string>
+    <string name="text_article">文章</string>
+    <string name="text_square">广场</string>
 </resources>
