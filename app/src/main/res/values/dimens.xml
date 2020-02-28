@@ -2,4 +2,6 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="dialog_width">120dp</dimen>
+
+    <dimen name="font_26">46sp</dimen>
 </resources>

@@ -4,14 +4,11 @@
 
     <item
         android:id="@+id/firstFragment"
-        android:icon="@drawable/ic_looks_one_black_24dp"
         android:title="首页" />
     <item
         android:id="@+id/secondFragment"
-        android:icon="@drawable/ic_looks_two_black_24dp"
         android:title="发现" />
     <item
         android:id="@+id/thridFragment"
-        android:icon="@drawable/ic_looks_3_black_24dp"
         android:title="我的" />
 </menu>

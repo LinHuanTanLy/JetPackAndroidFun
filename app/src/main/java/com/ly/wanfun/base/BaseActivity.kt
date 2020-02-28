@@ -1,6 +1,12 @@
 package com.ly.wanfun.base
 
+import android.app.Activity
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -9,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
-import com.jaeger.library.StatusBarUtil
 import com.ly.wanfun.R
 import java.lang.reflect.ParameterizedType
 
@@ -23,13 +28,21 @@ abstract class BaseActivity<VM : BaseVm, DB : ViewDataBinding> : AppCompatActivi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        StatusBarUtil.setTranslucent(this)
+        initStatusBar()
         initViewDataBinding()
         lifecycle.addObserver(vm)
         //注册 UI事件
         registorDefUIChange()
         initView(savedInstanceState)
         initData()
+    }
+
+    private fun initStatusBar() {
+        setMIUIStatusBarDarkIcon(this, true)
+        setMeizuStatusBarDarkIcon(this, true)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
     }
 
     abstract fun layoutId(): Int
@@ -107,5 +120,54 @@ abstract class BaseActivity<VM : BaseVm, DB : ViewDataBinding> : AppCompatActivi
         }
     }
 
+    /**
+     * 修改 MIUI V6  以上状态栏颜色
+     */
+    private fun setMIUIStatusBarDarkIcon(@NonNull activity: Activity, darkIcon: Boolean) {
+        val clazz: Class<out Window?> = activity.window.javaClass
+        try {
+            val layoutParams =
+                Class.forName("android.view.MiuiWindowManager\$LayoutParams")
+            val field =
+                layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE")
+            val darkModeFlag = field.getInt(layoutParams)
+            val extraFlagField = clazz.getMethod(
+                "setExtraFlags",
+                Int::class.javaPrimitiveType,
+                Int::class.javaPrimitiveType
+            )
+            extraFlagField.invoke(
+                activity.window,
+                if (darkIcon) darkModeFlag else 0,
+                darkModeFlag
+            )
+        } catch (e: Exception) { //e.printStackTrace();
+        }
+    }
+
+    /**
+     * 修改魅族状态栏字体颜色 Flyme 4.0
+     */
+    private fun setMeizuStatusBarDarkIcon(@NonNull activity: Activity, darkIcon: Boolean) {
+        try {
+            val lp = activity.window.attributes
+            val darkFlag =
+                WindowManager.LayoutParams::class.java.getDeclaredField("MEIZU_FLAG_DARK_STATUS_BAR_ICON")
+            val meizuFlags =
+                WindowManager.LayoutParams::class.java.getDeclaredField("meizuFlags")
+            darkFlag.isAccessible = true
+            meizuFlags.isAccessible = true
+            val bit = darkFlag.getInt(null)
+            var value = meizuFlags.getInt(lp)
+            value = if (darkIcon) {
+                value or bit
+            } else {
+                value and bit.inv()
+            }
+            meizuFlags.setInt(lp, value)
+            activity.window.attributes = lp
+        } catch (e: Exception) { //e.printStackTrace();
+        }
+    }
 
 }
