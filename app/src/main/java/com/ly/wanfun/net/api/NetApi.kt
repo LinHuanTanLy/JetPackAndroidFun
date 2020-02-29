@@ -15,5 +15,6 @@ class NetApi {
         }
     }
 
+    suspend fun getChaptersData() = mService.getChapters()
     suspend fun getBannerData() = mService.getBanner()
 }

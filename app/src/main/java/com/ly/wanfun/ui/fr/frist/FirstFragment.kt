@@ -1,6 +1,7 @@
 package com.ly.wanfun.ui.fr.frist
 
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 
@@ -20,6 +21,7 @@ class FirstFragment : BaseFragment<FirstViewModel, ViewDataBinding>() {
 
         vm.run {
             getBanner()
+            getChapters()
         }
         vm.mBannerSource.observe(this, Observer {
             with(bannerFirstAd) {
@@ -27,6 +29,9 @@ class FirstFragment : BaseFragment<FirstViewModel, ViewDataBinding>() {
                 setImageLoader(GlideImageLoader())
                 start()
             }
+        })
+        vm.mBannerSource.observe(this, Observer {
+            Log.d("lht",it.toString())
         })
     }
 
