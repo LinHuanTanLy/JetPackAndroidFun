@@ -4,13 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ly.wanfun.R
+import com.ly.wanfun.databinding.ItemChaptersListBinding
+import com.ly.wanfun.domain.bean.BannerBean
+import com.ly.wanfun.domain.bean.ChaptersBean
 
 class IndexContainerAdapter(
     private val context: Context,
-    private val fragments: ArrayList<Fragment>
+    private val list: List<ChaptersBean>
 ) : RecyclerView.Adapter<IndexContainerAdapter.IndexContainerHolder>() {
 
 
@@ -19,16 +22,18 @@ class IndexContainerAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IndexContainerHolder {
-        val view =
-            LayoutInflater.from(context).inflate(R.layout.item_banner_img, parent, false)
-        return IndexContainerHolder(view)
+        val binding: ItemChaptersListBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(context),
+            R.layout.item_chapters_list,
+            parent,
+            false
+        )
+        return IndexContainerHolder(binding.root)
     }
 
-    override fun getItemCount() = fragments.size
+    override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: IndexContainerHolder, position: Int) {
-        with(holder){
 
-        }
     }
 }

@@ -31,10 +31,23 @@
             app:layout_constraintGuide_percent="0.24" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rlvFirstChapters"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            app:itemBinding="@{data.itemBinding}"
+            app:items="@{data.MChaptersSource}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bannerFirstAd" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(data.MChaptersSource.size())}"
+            app:layout_constraintBottom_toTopOf="@+id/rlvFirstChapters"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bannerFirstAd" />

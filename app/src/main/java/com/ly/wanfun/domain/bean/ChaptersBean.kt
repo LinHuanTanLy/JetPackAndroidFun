@@ -1,5 +1,7 @@
 package com.ly.wanfun.domain.bean
 
+import androidx.databinding.BaseObservable
+
 /**
  * 获取公众号列表
  */

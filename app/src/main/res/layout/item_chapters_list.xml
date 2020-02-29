@@ -6,6 +6,10 @@
         <variable
             name="itemBean"
             type="com.ly.wanfun.domain.bean.ChaptersBean" />
+
+        <variable
+            name="listener"
+            type="com.ly.wanfun.ui.fr.frist.FirstViewModel.OnItemClickListener" />
     </data>
 
     <LinearLayout
@@ -15,6 +19,7 @@
 
         <ImageView
             android:id="@+id/ivChaptersPic"
+            android:src="@drawable/abc_vector_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
